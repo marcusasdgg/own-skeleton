@@ -27,5 +27,13 @@ void initialise_idt() {
     id_entry_33.flags = 0b10001110;
     set_idt_entry(33, id_entry_33);
 
+    struct idt_entry id_entry_32;
+    id_entry_32.offset_low = (uint32_t) interrupt_handler_32;
+    id_entry_32.offset_high = (uint32_t) interrupt_handler_32 >> 16;
+    id_entry_32.segment_selector = 0x08;
+    id_entry_32.zero = 0;
+    id_entry_32.flags = 0b10001110;
+    set_idt_entry(32, id_entry_32);
+
     load_interrupt_table(&descriptor);
 }

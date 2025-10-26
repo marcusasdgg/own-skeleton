@@ -5,7 +5,7 @@ import shutil
 
 argv = sys.argv
 
-compile_directories = [os.getcwd(),"tty","string", "serial", "stdio", "interrupts", "pic"]
+compile_directories = [os.getcwd(),"tty","string", "serial", "stdio", "interrupts", "pic", "queue"]
 assemble_directories = [os.getcwd(), "io", "interrupts"]
 
 env = os.environ.copy()

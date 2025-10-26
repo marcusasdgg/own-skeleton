@@ -77,7 +77,7 @@ _start:
 	extern initialize_PIC
 	call initialize_PIC
 
-	; initialize our interrupt descriptor table
+	;initialize our interrupt descriptor table
 	extern initialise_idt
 	call initialise_idt
 
@@ -93,12 +93,14 @@ _start:
 
 	jmp 0x08:.flush_cs
 .flush_cs:
-	; initialize serial and tty
+	;initialize serial and tty
 	extern terminal_initialize
 	call terminal_initialize
 
 	extern serial_initialize
-	call serial_intialize
+	call serial_initialize
+
+	sti
 
 	; This is a good place to initialize crucial processor state before the
 	; high-level kernel is entered. It's best to minimize the early

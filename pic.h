@@ -24,7 +24,7 @@
 #define CASCADE_IRQ 2
 
 // sends an end of interrupt signal yerr.
-void PIC_sendEOI(uint8_t irq);
+void pic_sendEOI(uint8_t irq);
 
 // this function will initialize and remaps the PIC to more appropiate 
 // interrupt number

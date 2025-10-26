@@ -34,8 +34,3 @@ void serial_configure_modem(unsigned short com) {
     out_b(SERIAL_MODEM_COMMAND_PORT(com), 0x03);
 }
 
-void serial_initialize(){
-    serial_configure_baud_rate(SERIAL_COM1_BASE,1);
-    serial_configure_line(SERIAL_COM1_BASE);
-    serial_configure_fifo(SERIAL_COM1_BASE);
-}

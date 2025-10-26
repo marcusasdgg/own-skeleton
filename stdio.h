@@ -11,6 +11,8 @@ enum stream {
 // prints null terminated string to given enum output stream.
 void print(const char* str, int output_stream);
 
+void print_int(int, int output_stream);
+
 
 
 // scans buffer from input stream.

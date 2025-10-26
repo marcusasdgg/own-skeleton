@@ -43,3 +43,4 @@ no_error_code_interrupt_handler_ 0       ; create handler for interrupt 0
 no_error_code_interrupt_handler_ 1       ; create handler for interrupt 1
 error_code_interrupt_handler_    7       ; create handler for interrupt 7
 no_error_code_interrupt_handler_ 33 ; create handler for 33 (keyboard)
+no_error_code_interrupt_handler_ 32

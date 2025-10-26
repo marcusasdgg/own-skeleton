@@ -5,6 +5,7 @@
 
 #include "../tty.h"
 #include "../io.h"
+#include "../circular_queue.h"
 
 #include "vga.h"
 
@@ -24,6 +25,9 @@ static size_t terminal_column;
 static uint8_t terminal_color;
 static uint16_t* terminal_buffer;
 
+static struct Queue inputBuffer;
+static struct Queue outputBuffer;
+
 void terminal_setcursor(size_t x, size_t y);
 
 void terminal_initialize(void) {
@@ -38,6 +42,8 @@ void terminal_initialize(void) {
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
+	initialise_Queue(&inputBuffer);
+	initialise_Queue(&outputBuffer);
 }
 
 void terminal_setcursor(size_t x, size_t y){
@@ -76,3 +82,11 @@ void terminal_putchar(char c) {
 	terminal_setcursor(terminal_column,terminal_row);
 }
 
+char terminal_getchar(){
+	while (isempty_Queue(&inputBuffer)){}
+	return pop_Queue(&inputBuffer);
+}
+
+void tty_push_input_buffer(unsigned char c){
+	emplace_Queue(&inputBuffer, c);
+}
