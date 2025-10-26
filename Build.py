@@ -43,7 +43,7 @@ def LINK_ALL():
 
 def CREATE_IMAGE():
     subprocess.run(["mkdir", "-p" ,"isodir/boot/grub"], env=env)
-    subprocess.run(["cp","myos.bin","isodir/boot/myos.bin"])
+    subprocess.run(["cp","myos.bin","isodir/boot/myos.kernel"])
     subprocess.run(["cp","grub.cfg","isodir/boot/grub/grub.cfg"])
     subprocess.run(["grub-mkrescue", "-o" ,"myos.iso", "isodir"])
 
