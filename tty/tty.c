@@ -6,6 +6,7 @@
 #include "../tty.h"
 #include "../io.h"
 #include "../circular_queue.h"
+#include "../basic_intrinsics.h"
 
 #include "vga.h"
 
@@ -97,7 +98,13 @@ void terminal_putchar(char c) {
 }
 
 char terminal_getchar(){
-	while (isempty_Queue(&inputBuffer)){}
+	//_cli();
+	while (isempty_Queue(&inputBuffer)){
+		//_sti();
+		//_halt();
+		//_cli();
+	}
+	//_sti();
 	return pop_Queue(&inputBuffer);
 }
 

@@ -53,3 +53,19 @@ void print_int(int a, int output_stream) {
             return;
     }
 }
+
+void put_char(char c, int output_stream){
+    switch (output_stream) {
+        case TTY:
+            terminal_putchar(c);
+            break;
+
+        case SERIAL:
+            serial_putchar(SERIAL_COM1_BASE,c);
+            break;
+
+        default:
+            print("Error: output stream does not exist\n", SERIAL);
+            return;
+    }
+}

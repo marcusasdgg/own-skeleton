@@ -15,22 +15,22 @@
     %endmacro
 
     extensible_interrupt_handler:               ; the common parts of the generic interrupt handler
-        push    eax
-        push    ebx
-        push    ecx
-        push    edx
-        push    ebp
+        push esp
+        push edx
+        push ecx
+        push ebx 
+        push eax
 
         ; call the C function
         
         call    common_interrupt_handler
 
         ; restore the registers
-        pop     ebp
-        pop     edx
-        pop     ecx
-        pop     ebx
-        pop     eax
+        pop eax
+        pop ebx 
+        pop ecx
+        pop edx 
+        pop esp
 
         ; restore the esp
         add     esp, 8

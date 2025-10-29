@@ -5,8 +5,8 @@ import shutil
 
 argv = sys.argv
 
-compile_directories = [os.getcwd(),"tty","string", "serial", "stdio", "interrupts", "pic", "queue"]
-assemble_directories = [os.getcwd(), "io", "interrupts"]
+compile_directories = [os.getcwd(),"tty","string", "serial", "stdio", "interrupts", "pic", "queue","keyboard"]
+assemble_directories = [os.getcwd(), "io", "interrupts","basic_intrinsics"]
 
 env = os.environ.copy()
 env["PATH"] = f"{os.path.expanduser('~')}/opt/cross/bin:" + env["PATH"]

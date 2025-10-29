@@ -81,6 +81,12 @@ _start:
 	extern initialise_idt
 	call initialise_idt
 
+	extern terminal_initialize
+	call terminal_initialize
+
+	extern serial_initialize
+	call serial_initialize
+
 	
 	
 	mov ax, 0x10
@@ -94,11 +100,7 @@ _start:
 	jmp 0x08:.flush_cs
 .flush_cs:
 	;initialize serial and tty
-	extern terminal_initialize
-	call terminal_initialize
 
-	extern serial_initialize
-	call serial_initialize
 
 	sti
 

@@ -5,7 +5,6 @@ struct cpu_state {
     unsigned int edx;
     unsigned int esp;
 } __attribute__((packed));
-// figure out why u are getting an interrupt 7?.
 
 struct stack_state {
     unsigned int error_code;

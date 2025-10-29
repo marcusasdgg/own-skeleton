@@ -13,6 +13,9 @@ void print(const char* str, int output_stream);
 
 void print_int(int, int output_stream);
 
+void put_char(const char, int output_stream);
+
+unsigned char get_char(int output_stream);
 
 
 // scans buffer from input stream.
