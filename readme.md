@@ -25,3 +25,10 @@ we have since implemented a lot of this stuff now we are moving on to these mile
 
 interrupt support
 keyboard scan support
+
+update:
+Finished basic interrupt support and keyboard scan support
+
+new milestone:
+Paging and memory allocation
+user space programs
