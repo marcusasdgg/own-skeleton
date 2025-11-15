@@ -16,8 +16,8 @@ pub unsafe extern "C" fn memcpy(dst: *mut u8, src: *const u8, len: usize) -> *mu
 pub unsafe extern "C" fn memcmp(a: *const u8, b: *const u8, len: usize) -> i32 {
     for i in 0..len {
         unsafe {
-            if *a.add(i) == *b.add(i) {
-                return i.try_into().unwrap();
+            if *a.add(i) != *b.add(i) {
+                return i as i32
             }
         }
     }
