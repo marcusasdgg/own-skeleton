@@ -1,6 +1,1 @@
-isodir
-build
-myos.bin
-myos.iso
-d.txt
-serial_output.txt
+/target
