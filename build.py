@@ -4,6 +4,11 @@ import subprocesss
 
 build_directories = [""]
 compiler_tool_chain = "x86_64-elf-gcc"
+assemble_args = ["-f elf64", "-o"]
 
 
-def link
+def link_all():
+    return 
+
+def build_all():
+    return
