@@ -3,6 +3,7 @@
 
 use core::panic::PanicInfo;
 mod mem;
+mod multiboot;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
