@@ -4,6 +4,7 @@
 use core::panic::PanicInfo;
 mod mem;
 mod multiboot;
+mod paging;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
