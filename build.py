@@ -29,6 +29,7 @@ def clean():
 def link_all():
     dir = os.listdir("build")
     dir = [f"build/{x} " for x in dir]
+    print(dir)
     command = [f"{compiler_tool_chain}-gcc","-T", "linker.ld", "-o", f"{OS_NAME}.bin" ,"-ffreestanding", "-O2", "-nostdlib"] + dir + ["-lgcc"]
     subprocess.run(command, env=env)
 

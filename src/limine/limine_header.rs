@@ -612,6 +612,5 @@ pub const static LIMINE_RISCV_BSP_HARTID_REQUEST_ID: [u64;4] = [
 pub const static LIMINE_BOOTLOADER_PERFORMANCE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
-    0x6b50ad9bf36d13ad, 
-    0xdc4c7e88fc759e17
+    0x6b50ad9bf36d13ad, 0xdc4c7e88fc759e17
 ];
