@@ -42,18 +42,18 @@ impl PageEntry64 {
         read_write: bool,
         present: bool
     ) -> Self {
-            let mut value: u64 = execute_disable << 11;
+            let mut value: u64 = (execute_disable as u64) << 11;
 
-
+        todo!()
     }
 
     fn pml3_entry() -> Self {
-
+        todo!()
     }
 
 
     fn pml2_entry() -> Self {
-
+        todo!()
     }
 }
 
@@ -61,5 +61,5 @@ impl PageEntry64 {
 
 // basic function to start initialising of paging should change this later.
 pub fn initialise_paging(){
-
+    todo!()
 }

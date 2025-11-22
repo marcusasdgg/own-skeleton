@@ -1,6 +1,7 @@
 use std::fmt::format;
 use std::fs;
 use std::env;
+use std::io::Write;
 use std::process::Command;
 
 
@@ -107,6 +108,13 @@ fn header_binding(directory_path: &str, file_name: &str) {
         .generate()
         .expect(&format!("failed to gen bindings for file: {file_name}.h"));
 
-    bindings.write_to_file(format!("{directory_path}/mod.rs"))
+    bindings.write_to_file(format!("{directory_path}/{file_name}_header.rs"))
         .expect(&format!("failed to generate bindings for {file_name}"));
+
+    if fs::exists(format!("{directory_path}/mod.rs")).is_ok_and(|x| x == false) {
+        fs::write(format!("{directory_path}/mod.rs"), format!("pub mod {file_name}_header;\n")).expect("failed to create mod.rs for ");
+    }
+    
 }
+
+

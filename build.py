@@ -7,7 +7,7 @@ import subprocess
 # todo remove redzone compile.
 
 build_directories = ["src"]
-header_directories = ["src/multiboot"]
+header_directories = ["src/limine"]
 compiler_tool_chain = "x86_64-elf"
 temp_output_directory = "build"
 build_mode = "debug"
@@ -28,7 +28,7 @@ def clean():
 
 def link_all():
     dir = os.listdir("build")
-    dir = [f"build/{x}" for x in dir]
+    dir = [f"build/{x} " for x in dir]
     command = [f"{compiler_tool_chain}-gcc","-T", "linker.ld", "-o", f"{OS_NAME}.bin" ,"-ffreestanding", "-O2", "-nostdlib"] + dir + ["-lgcc"]
     subprocess.run(command, env=env)
 
