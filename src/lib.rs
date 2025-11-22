@@ -6,6 +6,8 @@ mod mem;
 mod paging;
 mod limine;
 
+use limine::limine_header;
+
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
@@ -14,6 +16,8 @@ fn panic(_info: &PanicInfo) -> ! {
 // define our limine stuff up here maybe? idk 
 // if we do this then 
 // Todo! move this out when you start making it available for other architectures.
+
+
 
 
 #[unsafe(no_mangle)] 
