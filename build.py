@@ -7,7 +7,7 @@ import subprocess
 # todo remove redzone compile.
 
 build_directories = ["src"]
-header_directories = ["src/limine"]
+header_directories = []# ["src/limine"]
 compiler_tool_chain = "x86_64-elf"
 temp_output_directory = "build"
 build_mode = "debug"
