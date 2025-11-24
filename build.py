@@ -22,7 +22,7 @@ def clean():
     os.mkdir("build")
     if os.path.exists("isodir"):
         shutil.rmtree("isodir")
-    if os.path.exists("own-skeleton.bin"):
+    if os.path.exists(f"{OS_NAME}.bin"):
         os.remove("own-skeleton.bin")
 
 def link_all():
@@ -44,7 +44,25 @@ def compile_all():
     return
 
 def make_image():
-    
+    os.mkdir("isodir")
+    os.mkdir("isodir/boot")
+    shutil.copy(f"{OS_NAME}.bin", f"isodir/boot")
+    os.mkdir("isodir/boot/limine")
+    subprocess.run(["cp", "-v", "limine.conf", "limine/limine-bios.sys", "limine/limine-bios-cd.bin", "limine/limine-uefi-cd.bin", "isodir/boot/limine/"])
+
+    os.mkdir("isodir/EFI")
+    os.mkdir("isodir/EFI/BOOT")
+    shutil.copy("limine/BOOTX64.EFI", "isodir/EFI/BOOT/")
+    shutil.copy("limine/BOOTIA32.EFI", "isodir/EFI/BOOT/")
+    subprocess.run([
+        "xorriso","-as","mkisofs","-R","-r","-J","-b","boot/limine/limine-bios-cd.bin",
+        "-no-emul-boot","-boot-load-size","4","-boot-info-table","-hfsplus","-apm-block-size",
+        "2048","--efi-boot","boot/limine/limine-uefi-cd.bin","-efi-boot-part","--efi-boot-image"
+        ,"--protective-msdos-label","isodir","-o","image.iso"
+    ])
+    subprocess.run([
+        "./limine/limine", "bios-install" ,"image.iso"
+    ])
     return
 
 def build_all():
