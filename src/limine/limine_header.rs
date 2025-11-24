@@ -199,6 +199,10 @@ pub struct limine_framebuffer_request {
     pub revision: u64,
     pub response: *mut limine_framebuffer_response,
 }
+unsafe impl Sync for limine_framebuffer_request {
+
+}
+
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct limine_paging_mode_response {
@@ -440,18 +444,18 @@ pub struct limine_bootloader_performance_request {
 }
 
 // implementing the missing macros
-pub const static LIMINE_REQUESTS_START_MARKER: [u64;4] = [
+pub const LIMINE_REQUESTS_START_MARKER: [u64;4] = [
     0xf6b8f4b39de7d1ae, 0xfab91a6940fcb9cf,
     0x785c6ed015d3e316, 0x181e920a7852b9d9
 ];
 
-pub const static LIMINE_REQUESTS_END_MARKER: [u64;2] = [
+pub const LIMINE_REQUESTS_END_MARKER: [u64;2] = [
     0xadc0e0531bb10d03, 0x9572709f31764c62
 ];
 
 
 pub const fn LIMINE_BASE_REVISION(N: u64) -> [u64;3] {
-    [0xf9562b2d5c95a6c8, 0x6a7b384944536bdc, N];
+    [0xf9562b2d5c95a6c8, 0x6a7b384944536bdc, N]
 }
 
 pub const fn LIMINE_BASE_REVISION_SUPPORTED(VAR: [u64; 3]) -> bool {
@@ -461,13 +465,13 @@ pub const fn LIMINE_BASE_REVISION_SUPPORTED(VAR: [u64; 3]) -> bool {
 pub const fn LIMINE_LOADED_BASE_REVISION_VALID(VAR: [u64; 3]) -> bool {
     return VAR[1] != 0x6a7b384944536bdc
 }
-pub const fn LIMINE_LOADED_BASE_REVISION(VAR: [u64; 3]) -> u64 {
+pub const fn LIMINE_LOADED_BASE_REVISION(VAR: [u64; 3]) -> bool {
     return VAR[1] == 0
 }
 
-pub const static LIMINE_COMMON_MAGIC: [u64;2] = [0xc7b1dd30df4c8b88, 0x0a82e883a194f07b];
+pub const LIMINE_COMMON_MAGIC: [u64;2] = [0xc7b1dd30df4c8b88, 0x0a82e883a194f07b];
 
-pub const static LIMINE_BOOTLOADER_INFO_REQUEST_ID: [u64;4] = [
+pub const LIMINE_BOOTLOADER_INFO_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0xf55038d8e2a1202f, 
@@ -475,7 +479,7 @@ pub const static LIMINE_BOOTLOADER_INFO_REQUEST_ID: [u64;4] = [
 ];
 
 
-pub const static LIMINE_EXECUTABLE_CMDLINE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_EXECUTABLE_CMDLINE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x4b161536e598651e, 
@@ -483,134 +487,135 @@ pub const static LIMINE_EXECUTABLE_CMDLINE_REQUEST_ID: [u64;4] = [
 ];
 
 
-pub const static LIMINE_FIRMWARE_TYPE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_FIRMWARE_TYPE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x8c2f75d90bef28a8, 
     0x7045a4688eac00c3
 ];
 
-pub const static LIMINE_STACK_SIZE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_STACK_SIZE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x224ef0460a8e8926, 
     0xe1cb0fc25f46ea3d
 ];
 
-pub const static LIMINE_HHDM_REQUEST_ID: [u64;4] = [
+pub const LIMINE_HHDM_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x48dcf1cb8ad2b852, 
     0x63984e959a98244b
 ];
 
-pub const static LIMINE_FRAMEBUFFER_REQUEST_ID: [u64;4] = [
+pub const LIMINE_FRAMEBUFFER_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x9d5827dcd881dd75, 
     0xa3148604f6fab11b
 ];
 
-pub const static LIMINE_PAGING_MODE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_PAGING_MODE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x95c1a0edab0944cb, 
     0xa4e5cb3842f7488a
 ];
 
-pub const static LIMINE_MP_REQUEST_ID: [u64;4] = [
+pub const LIMINE_MP_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x95a67b819a1b857e, 
     0xa0b61b723b6a73e0
 ];
 
-pub const static LIMINE_MEMMAP_REQUEST_ID: [u64;4] = [
+pub const LIMINE_MEMMAP_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x67cf3d9d378a806f, 
     0xe304acdfc50c3c62
 ];
 
-pub const static LIMINE_ENTRY_POINT_REQUEST_ID: [u64;4] = [
+pub const LIMINE_ENTRY_POINT_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x13d86c035a1cd3e1, 
     0x2b0caa89d8f3026a
 ];
 
-pub const static LIMINE_EXECUTABLE_FILE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_EXECUTABLE_FILE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0xad97e90e83f1ed67, 
     0x31eb5d1c5ff23b69
 ];
 
-pub const static LIMINE_MODULE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_MODULE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x3e7e279702be32af, 
     0xca1c4f3bd1280cee
 ];
 
-pub const static LIMINE_RSDP_REQUEST_ID: [u64;4] = [
+pub const LIMINE_RSDP_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0xc5e77b6b397e7b43, 
     0x27637845accdcf3c
 ];
 
-pub const static LIMINE_SMBIOS_REQUEST_ID: [u64;4] = [
+pub const LIMINE_SMBIOS_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x9e9046f11e095391, 
     0xaa4a520fefbde5ee
 ];
 
-pub const static LIMINE_EFI_SYSTEM_TABLE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_EFI_SYSTEM_TABLE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x5ceba5163eaaf6d6, 
     0x0a6981610cf65fcc
 ];
 
-pub const static LIMINE_EFI_MEMMAP_REQUEST_ID: [u64;4] = [
+pub const LIMINE_EFI_MEMMAP_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x7df62a431d6872d5, 
     0xa4fcdfb3e57306c8
 ];
 
-pub const static LIMINE_DATE_AT_BOOT_REQUEST_ID: [u64;4] = [
+pub const LIMINE_DATE_AT_BOOT_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x502746e184c088aa, 
     0xfbc5ec83e6327893
 ];
 
-pub const static LIMINE_EXECUTABLE_ADDRESS_REQUEST_ID: [u64;4] = [
+pub const LIMINE_EXECUTABLE_ADDRESS_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x71ba76863cc55f63, 
     0xb2644a48c516a487
 ];
 
-pub const static LIMINE_DTB_REQUEST_ID: [u64;4] = [
+pub const LIMINE_DTB_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0xb40ddb48fb54bac7, 
     0x545081493f81ffb7
 ];
 
-pub const static LIMINE_RISCV_BSP_HARTID_REQUEST_ID: [u64;4] = [
+pub const LIMINE_RISCV_BSP_HARTID_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
     0x1369359f025525f9, 
     0x2ff2a56178391bb6
 ];
 
-pub const static LIMINE_BOOTLOADER_PERFORMANCE_REQUEST_ID: [u64;4] = [
+pub const LIMINE_BOOTLOADER_PERFORMANCE_REQUEST_ID: [u64;4] = [
     LIMINE_COMMON_MAGIC[0],
     LIMINE_COMMON_MAGIC[1],
-    0x6b50ad9bf36d13ad, 0xdc4c7e88fc759e17
+    0x6b50ad9bf36d13ad, 
+    0xdc4c7e88fc759e17
 ];

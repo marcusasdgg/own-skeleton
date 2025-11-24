@@ -6,12 +6,12 @@ use limine_header::LIMINE_FRAMEBUFFER_REQUEST_ID;
 
 #[unsafe(link_section = ".limine_requests")]
 #[used]
-pub static LIMINE_BASE_REVISION: [u64;4] = limine_header::LIMINE_BASE_REVISION(4);
+pub static LIMINE_BASE_REVISION: [u64;3] = limine_header::LIMINE_BASE_REVISION(4);
 
 #[unsafe(link_section = ".limine_requests")]
 #[used]
 pub static LIMINE_FRAMEBUFFER_REQUEST: limine_framebuffer_request = limine_header::limine_framebuffer_request { 
-    id: limineheader::LIMINE_FRAMEBUFFER_REQUEST_ID,
+    id: limine_header::LIMINE_FRAMEBUFFER_REQUEST_ID,
     revision: 0,
     response: core::ptr::null_mut()
 };
@@ -24,5 +24,5 @@ pub static LIMINE_REQUESTS_START_MARKER: [u64;4] = limine_header::LIMINE_REQUEST
 
 #[unsafe(link_section = ".limine_requests_end")]
 #[used]
-pub static LIMINE_REQUESTS_END_MARKER: [u64;4] = limine_header::LIMINE_REQUESTS_END_MARKER;
+pub static LIMINE_REQUESTS_END_MARKER: [u64;2] = limine_header::LIMINE_REQUESTS_END_MARKER;
 

@@ -40,6 +40,10 @@ fn main(){
 
     let header_paths= env::var("HEADER_PATHS").unwrap();
     //directory loop
+    if header_paths.is_empty(){
+        return;
+    }
+       
     for i in header_paths.split(","){
         println!("parsing directory: {i}");
         let directory = fs::read_dir(i).unwrap();
