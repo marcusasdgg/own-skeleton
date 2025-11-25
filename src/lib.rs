@@ -27,7 +27,7 @@ fn panic(_info: &PanicInfo) -> ! {
 
 
 #[unsafe(no_mangle)] 
-pub extern "C" fn kmain() -> ! {
+pub extern "C" fn _start() -> ! {
     
     unsafe {
         if limine::limine_header::LIMINE_BASE_REVISION_SUPPORTED(limine::LIMINE_BASE_REVISION) == false {
