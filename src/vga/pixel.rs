@@ -6,7 +6,7 @@ pub struct Pixel {
     alpha: u32,
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct Coordinate {
     pub x: usize,
     pub y: usize

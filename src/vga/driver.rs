@@ -81,11 +81,47 @@ impl VgaDriver {
         self.replicated_buffer[point.y][point.x] = pixel;
     }
 
-    pub fn draw_box(&mut self, start: Coordinate, width: usize, length: usize) {
+    pub fn draw_box(&mut self, start: Coordinate, width: usize, length: usize, color: Pixel) {
         // we need to draw 4 lines.
+        let mut corner2 = start;
+        let mut corner3 = start;
+        let mut corner4 = start;
+        corner2.x += width;
+        corner3.y += length;
+        corner4.x += width;
+        corner4.y += length;
+
+        self.draw_line(start, corner2, color);
+        self.draw_line(start, corner3, color);
+
+        self.draw_line(corner2, corner4, color);
+        self.draw_line(corner3, corner4, color);
     }
 
-    pub fn draw_line(&mut self, start: Coordinate, end: Coordinate) {
-        
+    pub fn draw_line(&mut self, start: Coordinate, end: Coordinate, pixel: Pixel) {
+        let mut temp = start;
+        // step right and down each time until we reach the coordinate.
+        while temp != end {
+            // find first if we need to move up or down, left or right.
+            // move right 1.
+            if (temp.x > end.x){
+                temp.x -= 1;
+            }
+
+            if (temp.x < end.x) {
+                temp.x += 1;
+            }
+
+            if (temp.y > end.y) {
+                temp.y -= 1;
+            }
+
+            if (temp.y < end.y) {
+                temp.y += 1;
+            }
+
+            self.draw_pixel(temp, pixel);
+        }
+
     }
 }
