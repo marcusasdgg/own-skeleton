@@ -6,6 +6,18 @@ pub struct Pixel {
     alpha: u32,
 }
 
+#[derive(Copy, Clone)]
+pub struct Coordinate {
+    pub x: usize,
+    pub y: usize
+}
+
+impl Coordinate {
+pub const fn new(x: usize, y: usize) -> Self {
+    Self {x,y}
+}
+}
+
 
 
 

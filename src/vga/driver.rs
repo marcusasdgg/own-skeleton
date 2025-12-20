@@ -4,7 +4,9 @@
 use core::ptr::write_volatile;
 
 use crate::limine::limine_header::limine_framebuffer_response;
-use crate::vga::pixel::Pixel;
+use crate::vga::pixel::{Coordinate, Pixel};
+
+// change everything to u32 at some point possibly.
 
 pub struct VgaDriver {
     // lets have an internal buffer replicating the current one for now, 
@@ -75,7 +77,15 @@ impl VgaDriver {
         }
     }
     // this goes into our 2nd framebuffer.
-    pub fn draw_pixel(&mut self, x: usize, y: usize, pixel: Pixel) {
-        self.replicated_buffer[y][x] = pixel;
+    pub fn draw_pixel(&mut self, point: Coordinate, pixel: Pixel) {
+        self.replicated_buffer[point.y][point.x] = pixel;
+    }
+
+    pub fn draw_box(&mut self, start: Coordinate, width: usize, length: usize) {
+        // we need to draw 4 lines.
+    }
+
+    pub fn draw_line(&mut self, start: Coordinate, end: Coordinate) {
+        
     }
 }

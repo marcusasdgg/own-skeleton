@@ -14,7 +14,7 @@ use limine::limine_header::limine_framebuffer;
 
 use limine::limine_checks;
 use crate::limine::limine_header::{limine_framebuffer_request, limine_framebuffer_response};
-use crate::vga::pixel::Pixel;
+use crate::vga::pixel::{Coordinate, Pixel};
 use crate::vga::{GLOBAL_VGA_DRIVER, VgaDriver};
 
 
@@ -62,7 +62,7 @@ pub extern "C" fn _start() -> ! {
 
         for y in 0..720{
             for x in 0..1280 {
-                lock.draw_pixel(x, y, pixel);
+                lock.draw_pixel(Coordinate::new(x,y), pixel);
             }
             i += 1;
             if i == 1 {
