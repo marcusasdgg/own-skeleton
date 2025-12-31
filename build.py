@@ -7,7 +7,7 @@ import subprocess
 #todo! make assemble arguments like not hardcoded also compil eargs as well.
 # todo remove redzone compile.
 
-build_directories = ["src"]
+build_directories = ["src", "src/intrinsics"]
 header_directories = []# ["src/limine"]
 compiler_tool_chain = "x86_64-elf"
 temp_output_directory = "build"

@@ -8,12 +8,15 @@ mod mem;
 mod paging;
 mod limine;
 mod vga;
+mod intrinsics;
+mod serial;
 
 use limine::LIMINE_FRAMEBUFFER_REQUEST;
 use limine::limine_header::limine_framebuffer;
 
 use limine::limine_checks;
 use crate::limine::limine_header::{limine_framebuffer_request, limine_framebuffer_response};
+use crate::serial::{GLOBAL_SERIAL_DRIVER, COMM};
 use crate::vga::pixel::{Coordinate, Pixel};
 use crate::vga::{GLOBAL_VGA_DRIVER, VgaDriver};
 
@@ -45,15 +48,21 @@ pub extern "C" fn _start() -> ! {
         let mut lock = GLOBAL_VGA_DRIVER.lock();
         lock.init(limine_goodies).unwrap();
 
+        let mut serial_lock = GLOBAL_SERIAL_DRIVER.lock();
+        serial_lock.initialize([COMM::COMM1(0x3F8), COMM::None, COMM::None]);
+
+        //serial here
+
+
         let mut pixel = Pixel::green();
-        let position1 = Coordinate::new(0, 0);
+        let position1 = Coordinate::new(300, 0);
 
-        let position2 = Coordinate::new(720,720);
-
-        lock.draw_line(position1, position2, pixel);
-
-        lock.draw_box(position1, 719, 719, pixel);
-
+        lock.draw_box(position1, 100, 100, pixel);
+        lock.draw_box(Coordinate::new(400, 0), 100, 100, pixel);
+        lock.draw_box(Coordinate::new(500, 0), 100, 100, pixel);
+        lock.draw_box(Coordinate::new(400, 100), 100, 100, pixel);
+        lock.draw_box(Coordinate::new(400, 200), 100, 100, pixel);
+        
         lock.draw_screen();
 
         drop(lock)

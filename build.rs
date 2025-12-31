@@ -29,6 +29,7 @@ fn main(){
                 if name.ends_with(".c") {   
                     compile_file(i, &name[0..name.len()-2], &tool_chain, &build_directory);
                 } else if name.ends_with(".asm") {
+                    println!("found assembly file {name}");
                     assemble_file(i, &name[0..name.len()-4], &build_directory);
                 } else {
                     println!("Unexpected file: \"{name}\"");
@@ -93,7 +94,7 @@ fn assemble_file(directory_path: &str, file_name: &str, build_dir: &str){
     let mut nasm_comm = Command::new("nasm");
 
     let nasm_comm = nasm_comm
-        .arg("-felf32")
+        .arg("-felf64")
         .arg(full_path)
         .arg("-o")
         .arg(build_path);
